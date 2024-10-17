@@ -6,7 +6,7 @@
 /*   By: blatifat <blatifat@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 02:24:54 by blatifat          #+#    #+#             */
-/*   Updated: 2024/10/06 02:25:35 by blatifat         ###   ########.fr       */
+/*   Updated: 2024/10/17 04:51:26 by blatifat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define ARRAY_HPP
 
 #include <iostream>
-#include <stdexcept>  // Pour gérer les exceptions
+#include <stdexcept>
 
 template <typename T>
 class Array {
@@ -23,18 +23,14 @@ private:
     unsigned int _size;
 
 public:
-    // Constructeur sans paramètre : crée un tableau vide
     Array() : _array(NULL), _size(0) {}
 
-    // Constructeur avec un paramètre n : crée un tableau avec n éléments
     Array(unsigned int n) : _array(new T[n]), _size(n) {}
 
-    // Constructeur par copie
     Array(const Array& other) : _array(NULL), _size(0) {
         *this = other;
     }
-
-    // Opérateur d'affectation
+    
     Array& operator=(const Array& other) {
         if (this != &other) {
             delete[] _array;
@@ -47,12 +43,10 @@ public:
         return *this;
     }
 
-    // Destructeur
     ~Array() {
         delete[] _array;
     }
-
-    // Accès aux éléments avec l'opérateur []
+    
     T& operator[](unsigned int index) {
         if (index >= _size) {
             throw std::out_of_range("Index out of bounds");
@@ -60,7 +54,6 @@ public:
         return _array[index];
     }
 
-    // Accès constant aux éléments (pour les objets const)
     const T& operator[](unsigned int index) const {
         if (index >= _size) {
             throw std::out_of_range("Index out of bounds");
@@ -68,7 +61,6 @@ public:
         return _array[index];
     }
 
-    // Fonction qui renvoie la taille du tableau
     unsigned int size() const {
         return _size;
     }
